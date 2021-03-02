@@ -1,3 +1,5 @@
+use rpn::run;
+
 fn main() {
-    println!("Hello, world!");
+    run();
 }

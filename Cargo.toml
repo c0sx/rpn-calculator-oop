@@ -1,5 +1,5 @@
 [package]
-name = "rpn-calculator"
+name = "rpn"
 version = "0.1.0"
 authors = ["tweek <vallkhale@gmail.com>"]
 edition = "2018"
