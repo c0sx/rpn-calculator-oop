@@ -1,6 +1,6 @@
-use super::token::Token;
+use crate::expression::token::Token;
 
-use crate::tokens::infix_tokens::InfixTokens;
+use super::token_builder::TokenBuilder;
 
 pub struct Tokenizer {
     input: String,
@@ -10,7 +10,7 @@ pub struct Tokenizer {
 
 // имплементация трейта (интерфейса) итератора
 impl Iterator for Tokenizer {
-    type Item = String; // String to Token?
+    type Item = Token;
 
     // на каждой итерации берем срез строки от текущего положения курсора и пытаемся найти в нем следующий токен
     fn next(&mut self) -> Option<Self::Item> {
@@ -40,26 +40,13 @@ impl Tokenizer {
         }
     }
 
-    pub fn parse(self) -> InfixTokens {
-        let tokens = self.into_iter().collect::<Vec<String>>();
-
-        InfixTokens::new(tokens)
-    }
-
-    // получить следующий токен
-    // трансформировать унарные токены
-    fn get_next_token(&mut self, s: String) -> Option<String> {
-        let token = self.parse_next_token(s);
-        if token.len() == 0 {
-            return None;
-        }
-
-        Some(token)
+    pub fn parse(self) -> Vec<Token> {
+        self.into_iter().collect::<Vec<Token>>()
     }
 
     // получение следующего токена со среза строки (для итератора)
-    fn parse_next_token(&self, s: String) -> String {
-        let mut token = Token::new();
+    fn get_next_token(&mut self, s: String) -> Option<Token> {
+        let mut token = TokenBuilder::new();
         let mut iter = s.chars().into_iter();
 
         while token.is_filled() == false {
@@ -70,6 +57,6 @@ impl Tokenizer {
             }
         }
 
-        token.to_string()
+        token.build()
     }
 }

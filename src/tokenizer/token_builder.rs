@@ -1,7 +1,9 @@
+use crate::expression::token::Token;
+
 use super::numeric::Numeric;
 use super::separator::Separator;
 
-pub struct Token {
+pub struct TokenBuilder {
     value: String,
     is_filled: bool,
 
@@ -9,9 +11,9 @@ pub struct Token {
     separators: Separator
 }
 
-impl Token {
-    pub fn new() -> Token {
-        Token {
+impl TokenBuilder {
+    pub fn new() -> TokenBuilder {
+        TokenBuilder {
             value: String::new(),
             is_filled: false,
 
@@ -42,8 +44,11 @@ impl Token {
         self.is_filled
     }
 
-    // todo
-    pub fn to_string(&self) -> String {
-        self.value.clone()
+    pub fn build(&self) -> Option<Token> {
+        return if self.value.len() == 0 {
+            None
+        } else {
+            Some(Token::new(self.value.clone()))
+        };
     }
 }

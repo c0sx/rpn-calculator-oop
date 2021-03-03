@@ -1,7 +1,8 @@
 mod tokenizer;
-mod tokens;
+mod expression;
 
 use tokenizer::tokenizer::Tokenizer;
+use crate::expression::infix_expression::InfixExpression;
 
 pub fn run() {
     parse(String::from("(1 + 2) * 4 + 3 + (-1)"));
@@ -19,8 +20,8 @@ pub fn run() {
 }
 
 fn parse(s: String) {
-    let infix_tokens = Tokenizer::from(&s).parse();
-    let rpn_tokens = infix_tokens.to_rpn_tokens();
+    let infix = InfixExpression::from(Tokenizer::from(&s));
+    let rpn: Vec<String> = vec![];
 
-    println!("input: {}\ninfix: {:?}\nrpn: {:?}\n", s, infix_tokens, rpn_tokens);
+    println!("input: {}\ninfix: {:?}\nrpn: {:?}\n", s, infix, rpn);
 }
