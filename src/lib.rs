@@ -1,5 +1,6 @@
 mod expression;
 mod tokenizer;
+mod token;
 
 use crate::expression::infix_expression::InfixExpression;
 use tokenizer::tokenizer::Tokenizer;

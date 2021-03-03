@@ -45,10 +45,10 @@ impl TokenBuilder {
     }
 
     pub fn build(&self) -> Option<Token> {
-        return if self.value.len() == 0 {
-            None
-        } else {
+        return if self.value.len() > 0 {
             Some(Token::new(self.value.clone()))
+        } else {
+            None
         };
     }
 }
