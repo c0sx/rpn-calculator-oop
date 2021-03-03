@@ -8,7 +8,7 @@ pub struct TokenBuilder {
     is_filled: bool,
 
     numeric: Numeric,
-    separators: Separator
+    separators: Separator,
 }
 
 impl TokenBuilder {
@@ -18,7 +18,7 @@ impl TokenBuilder {
             is_filled: false,
 
             numeric: Numeric::new(),
-            separators: Separator::new()
+            separators: Separator::new(),
         }
     }
 

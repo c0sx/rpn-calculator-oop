@@ -4,7 +4,7 @@ use crate::expression::infix_expression::InfixExpression;
 pub struct RpnExpression {
     tokens: Vec<String>,
     output_queue: Vec<String>,
-    stack: Vec<String>
+    stack: Vec<String>,
 }
 
 impl RpnExpression {
@@ -12,7 +12,7 @@ impl RpnExpression {
         RpnExpression {
             tokens: vec![],
             output_queue: Vec::new(),
-            stack: Vec::new()
+            stack: Vec::new(),
         }
     }
 }

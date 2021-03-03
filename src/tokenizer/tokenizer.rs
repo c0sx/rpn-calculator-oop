@@ -53,7 +53,7 @@ impl Tokenizer {
             let c = iter.next();
             match c {
                 Some(c) => token.push(c),
-                None => break
+                None => break,
             }
         }
 

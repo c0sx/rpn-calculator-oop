@@ -1,13 +1,11 @@
 #[derive(Debug)]
-pub struct Token  {
-    pub value: String
+pub struct Token {
+    pub value: String,
 }
 
 impl Token {
     pub fn new(value: String) -> Token {
-        Token {
-            value
-        }
+        Token { value }
     }
 
     pub fn len(&self) -> usize {
