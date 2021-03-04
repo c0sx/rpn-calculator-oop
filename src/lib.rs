@@ -1,9 +1,11 @@
+use tokenizer::tokenizer::Tokenizer;
+
+use crate::expression::expression::Expression;
+use crate::calculator::calculator::Calculator;
+
 mod expression;
 mod tokenizer;
-mod token;
-
-use crate::expression::infix_expression::InfixExpression;
-use tokenizer::tokenizer::Tokenizer;
+mod calculator;
 
 pub fn run() {
     parse(String::from("(1 + 2) * 4 + 3 + (-1)"));
@@ -21,9 +23,13 @@ pub fn run() {
 }
 
 fn parse(s: String) {
+    print!("input: {}\n", &s);
     let tokenizer = Tokenizer::from(&s);
-    let infix = InfixExpression::from(tokenizer);
-    let rpn: Vec<String> = vec![];
 
-    println!("input: {}\ninfix: {:?}\nrpn: {:?}\n", s, infix, rpn);
+    let expression = Expression::from(tokenizer);
+    print!("expression: {:?}\n", expression);
+
+    let mut calculator = Calculator::new();
+    let result = calculator.calculate(expression);
+    println!("result: {}\n",result);
 }

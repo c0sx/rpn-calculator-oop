@@ -3,16 +3,16 @@ use crate::tokenizer::tokenizer::Tokenizer;
 use super::token::Token;
 
 #[derive(Debug)]
-pub struct InfixExpression {
+pub struct Expression {
     tokens: Vec<Token>,
     cursor: usize,
 }
 
 // имплементация трейта (интерфейса) итератора
-impl Iterator for InfixExpression {
+impl Iterator for Expression {
     type Item = Token;
 
-    fn next(&mut self) -> Option<Token> {
+    fn next(&mut self) -> Option<Self::Item> {
         if self.cursor >= self.tokens.len() {
             return None;
         }
@@ -27,9 +27,9 @@ impl Iterator for InfixExpression {
     }
 }
 
-impl InfixExpression {
-    pub fn from(tokenizer: Tokenizer) -> InfixExpression {
-        InfixExpression {
+impl Expression {
+    pub fn from(tokenizer: Tokenizer) -> Expression {
+        Expression {
             tokens: tokenizer.parse(),
             cursor: 0,
         }
