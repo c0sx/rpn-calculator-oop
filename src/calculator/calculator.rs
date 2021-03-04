@@ -1,26 +1,26 @@
-use crate::expression::expression::Expression;
 use crate::expression::token::Token;
 
-use super::sorter::sorter::Sorter;
+use super::sorter::SorterStation;
 
 pub struct Calculator {
-    sorter: Sorter,
+    sorter: SorterStation,
 }
 
 impl Calculator {
     pub fn new()  -> Calculator {
         Calculator {
-            sorter: Sorter::new()
+            sorter: SorterStation::new()
         }
     }
 
-    pub fn calculate(self, expression: Expression) -> f64 {
-        let rpn = self.sorter.to_rpn(expression);
+    pub fn calculate(&self, expression: Vec<Token>) -> f64 {
+        println!("tokens: {:?}", expression);
+        let rpn = self.sorter.sort(&expression);
 
-        self.execute(rpn)
+        self.execute(&rpn)
     }
 
-    fn execute(self, expression: &Vec<Token>) -> f64 {
+    fn execute(&self, expression: &Vec<Token>) -> f64 {
         let mut stack: Vec<f64> = Vec::new();
 
         for token in expression {
@@ -71,7 +71,8 @@ impl Calculator {
         }
 
         let (a, b) = (args[0], args[1]);
-        a - b
+
+        b - a
     }
 
     fn multiply(&self, arguments: &mut Vec<f64>) -> f64 {

@@ -18,14 +18,23 @@ impl Iterator for Tokenizer {
             return None;
         }
 
-        let substring = String::from(&self.input[self.cursor..]);
-        let token = self.get_next_token(substring);
+        let cursor = TokenBuilder::new(self.input.clone(), self.cursor);
+        let token = cursor.next();
 
-        if let Some(token) = &token {
-            self.cursor += token.len();
-        }
+        self.cursor += token.len();
 
-        token
+        Some(token)
+
+        // let substring = String::from(&self.input[self.cursor..]);
+        // println!("substr {}", substring);
+        //
+        // let token = self.get_next_token(substring);
+        //
+        // if let Some(token) = &token {
+        //     self.cursor += token.len();
+        // }
+        //
+        // token
     }
 }
 
@@ -35,7 +44,6 @@ impl Tokenizer {
 
         Tokenizer {
             input: without_whitespaces,
-
             cursor: 0,
         }
     }
@@ -46,7 +54,7 @@ impl Tokenizer {
 
     // получение следующего токена со среза строки (для итератора)
     fn get_next_token(&mut self, s: String) -> Option<Token> {
-        let mut token = TokenBuilder::new();
+        let mut token = TokenBuilder::new(self.input.clone(), self.cursor);
         let mut iter = s.chars().into_iter();
 
         while token.is_filled() == false {

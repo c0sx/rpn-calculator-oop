@@ -12,4 +12,8 @@ impl Separator {
     pub fn is_valid(&self, c: &char) -> bool {
         self.separators.contains(c)
     }
+
+    pub fn is_maybe_numeric(&self, c: &char) -> bool {
+        ['-'].contains(c)
+    }
 }

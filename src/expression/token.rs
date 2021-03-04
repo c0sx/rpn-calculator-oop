@@ -3,6 +3,12 @@ pub struct Token {
     pub value: String,
 }
 
+impl Clone for Token {
+    fn clone(&self) -> Self {
+        Token::new(self.value.clone())
+    }
+}
+
 impl Token {
     pub fn new(value: String) -> Token {
         Token { value }
