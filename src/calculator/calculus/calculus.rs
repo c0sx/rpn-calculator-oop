@@ -1,31 +1,24 @@
-use crate::expression::token::Token;
+use crate::calculator;
+use crate::calculator::calculus::RpnExpression;
+use crate::calculator::token::Token;
 
-use super::calculation;
-use super::sorter::SorterStation;
+pub struct Calculus { }
 
-pub struct Calculator {
-    sorter: SorterStation,
-}
-
-impl Calculator {
-    pub fn new() -> Calculator {
-        Calculator {
-            sorter: SorterStation::new(),
-        }
+impl Calculus {
+    pub fn new() -> Calculus {
+        Calculus {}
     }
 
-    pub fn calculate(&self, expression: Vec<Token>) -> calculation::Result {
-        let rpn = self.sorter.sort(&expression);
+    pub fn calculate(&self, expression: RpnExpression) -> calculator::Result {
+        let result = self.execute(&expression);
 
-        let result = self.execute(&rpn);
-
-        calculation::Result::new(rpn, result)
+        calculator::Result::new(expression, result)
     }
 
-    fn execute(&self, expression: &Vec<Token>) -> f64 {
+    fn execute(&self, expression: &RpnExpression) -> f64 {
         let mut stack: Vec<f64> = Vec::new();
 
-        for token in expression {
+        for token in &expression.tokens {
             if token.is_numeric() {
                 stack.push(
                     token
@@ -33,6 +26,7 @@ impl Calculator {
                         .parse::<f64>()
                         .expect("Ошибка при парсинге аргумента"),
                 );
+
                 continue;
             }
 

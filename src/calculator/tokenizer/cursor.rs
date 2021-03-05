@@ -1,6 +1,5 @@
-use crate::expression::token::Token;
-
-use super::symbol::symbol::Symbol;
+use crate::calculator::token::Token;
+use crate::calculator::tokenizer::symbol::Symbol;
 
 pub struct TokenCursor {
     input: String,

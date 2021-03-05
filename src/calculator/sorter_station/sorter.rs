@@ -1,4 +1,5 @@
-use crate::expression::token::Token;
+use crate::calculator::token::Token;
+use crate::calculator::calculus::RpnExpression;
 
 pub struct SorterStation {}
 
@@ -7,14 +8,14 @@ impl SorterStation {
         SorterStation {}
     }
 
-    pub fn sort(&self, expression: &Vec<Token>) -> Vec<Token> {
+    pub fn sort(&self, expression: &Vec<Token>) -> RpnExpression {
         let mut output_queue: Vec<Token> = vec![];
         let mut stack: Vec<Token> = vec![];
 
         self.process_tokens(expression, &mut output_queue, &mut stack);
         self.remains_in_stack(&mut output_queue, &mut stack);
 
-        output_queue
+        RpnExpression::new(output_queue)
     }
 
     // todo разобрать по типам токенов

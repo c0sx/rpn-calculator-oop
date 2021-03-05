@@ -1,6 +1,6 @@
 use std::io::{self, Write};
 
-use crate::calculator::calculation;
+use crate::calculator;
 
 pub struct Cli {
     stdin: io::Stdin,
@@ -21,9 +21,10 @@ impl Cli {
         self.read_to_string()
     }
 
-    pub fn output_results(&mut self, result: calculation::Result) {
+    pub fn output_results(&mut self, result: calculator::Result) {
         let expression = result
             .expression
+            .tokens
             .iter()
             .map(|t| t.value.as_str())
             .collect::<Vec<&str>>()
@@ -43,11 +44,11 @@ impl Cli {
         String::from(input.trim())
     }
 
-    fn output_string(&mut self, s: &str) -> io::Result<()> {
+    fn output_string(&mut self, s: &str) {
         let mut line = String::from(s);
         line.push('\n');
 
-        self.stdout.write_all(line.as_bytes())?;
-        self.stdout.flush()
+        self.stdout.write_all(line.as_bytes()).expect("Ошибка вывода");
+        self.stdout.flush().expect("Ошибка вывода")
     }
 }
