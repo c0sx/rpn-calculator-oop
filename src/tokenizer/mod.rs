@@ -1,5 +1,4 @@
 pub mod tokenizer;
 
-mod numeric;
-mod separator;
-mod token_builder;
+mod cursor;
+mod symbol;

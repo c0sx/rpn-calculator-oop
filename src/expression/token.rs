@@ -15,7 +15,7 @@ impl Token {
     }
 
     pub fn len(&self) -> usize {
-        self.value.len()
+        self.value.chars().count()
     }
 
     pub fn is_numeric(&self) -> bool {
@@ -31,7 +31,7 @@ impl Token {
     }
 
     pub fn is_brackets(&self) -> bool {
-        return self.is_open_bracket() || self.is_close_bracket()
+        return self.is_open_bracket() || self.is_close_bracket();
     }
 
     pub fn is_close_bracket(&self) -> bool {
@@ -40,7 +40,7 @@ impl Token {
 
     pub fn priority(&self) -> Result<u8, &'static str> {
         if self.is_operator() == false {
-            return Err("Токен должен быть оператором")
+            return Err("Токен должен быть оператором");
         }
 
         let value = match self.value.as_str() {
@@ -48,10 +48,10 @@ impl Token {
             "/" => 1,
             "+" => 0,
             "-" => 0,
-            _ => panic!("Токен должен быть оператором")
+            _ => panic!("Токен должен быть оператором"),
         };
 
-        return Ok(value)
+        return Ok(value);
     }
 
     pub fn clone(&self) -> Token {

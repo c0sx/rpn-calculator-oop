@@ -1,5 +1,6 @@
 use crate::expression::token::Token;
 
+use super::calculation;
 use super::sorter::SorterStation;
 
 pub struct Calculator {
@@ -7,17 +8,18 @@ pub struct Calculator {
 }
 
 impl Calculator {
-    pub fn new()  -> Calculator {
+    pub fn new() -> Calculator {
         Calculator {
-            sorter: SorterStation::new()
+            sorter: SorterStation::new(),
         }
     }
 
-    pub fn calculate(&self, expression: Vec<Token>) -> f64 {
-        println!("tokens: {:?}", expression);
+    pub fn calculate(&self, expression: Vec<Token>) -> calculation::Result {
         let rpn = self.sorter.sort(&expression);
 
-        self.execute(&rpn)
+        let result = self.execute(&rpn);
+
+        calculation::Result::new(rpn, result)
     }
 
     fn execute(&self, expression: &Vec<Token>) -> f64 {
@@ -25,7 +27,12 @@ impl Calculator {
 
         for token in expression {
             if token.is_numeric() {
-                stack.push(token.value.parse::<f64>().expect("Ошибка при парсинге аргумента"));
+                stack.push(
+                    token
+                        .value
+                        .parse::<f64>()
+                        .expect("Ошибка при парсинге аргумента"),
+                );
                 continue;
             }
 
@@ -57,7 +64,7 @@ impl Calculator {
     fn add(&self, arguments: &mut Vec<f64>) -> f64 {
         let mut args = self.get_arguments(arguments);
         if args.len() == 1 {
-            return self.positive(&mut args)
+            return self.positive(&mut args);
         }
 
         let (a, b) = (args[0], args[1]);
@@ -95,21 +102,14 @@ impl Calculator {
     fn negative(&self, arguments: &mut Vec<f64>) -> f64 {
         let args = self.get_arguments(arguments);
         let a = args[0];
-        return if a > 0.0 {
-            -a
-        } else {
-            a
-        }
+
+        return a * -1.0;
     }
 
     fn positive(&self, arguments: &mut Vec<f64>) -> f64 {
         let args = self.get_arguments(arguments);
         let a = args[0];
-        return if a < 0.0 {
-            a * -1.0
-        } else {
-            a
-        }
+        return if a < 0.0 { a * -1.0 } else { a };
     }
 
     fn get_arguments(&self, arguments: &mut Vec<f64>) -> Vec<f64> {

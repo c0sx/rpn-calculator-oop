@@ -1,10 +1,10 @@
 use crate::expression::token::Token;
 
-pub struct SorterStation { }
+pub struct SorterStation {}
 
 impl SorterStation {
     pub fn new() -> SorterStation {
-        SorterStation { }
+        SorterStation {}
     }
 
     pub fn sort(&self, expression: &Vec<Token>) -> Vec<Token> {
@@ -18,7 +18,12 @@ impl SorterStation {
     }
 
     // todo разобрать по типам токенов
-    fn process_tokens(&self, expression: &Vec<Token>, output_queue: &mut Vec<Token>, stack: &mut Vec<Token>) {
+    fn process_tokens(
+        &self,
+        expression: &Vec<Token>,
+        output_queue: &mut Vec<Token>,
+        stack: &mut Vec<Token>,
+    ) {
         for token in expression {
             if token.is_numeric() {
                 self.move_when_numeric(&token, output_queue);
@@ -46,7 +51,12 @@ impl SorterStation {
         output_queue.push(token.clone())
     }
 
-    fn move_when_operator(&self, token: &Token, output_queue: &mut Vec<Token>, stack: &mut Vec<Token>) {
+    fn move_when_operator(
+        &self,
+        token: &Token,
+        output_queue: &mut Vec<Token>,
+        stack: &mut Vec<Token>,
+    ) {
         while let Some(last) = stack.last() {
             if last.is_operator() == false || token.priority() > last.priority() {
                 break;
