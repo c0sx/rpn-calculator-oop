@@ -48,7 +48,9 @@ impl Cli {
         let mut line = String::from(s);
         line.push('\n');
 
-        self.stdout.write_all(line.as_bytes()).expect("Ошибка вывода");
+        self.stdout
+            .write_all(line.as_bytes())
+            .expect("Ошибка вывода");
         self.stdout.flush().expect("Ошибка вывода")
     }
 }

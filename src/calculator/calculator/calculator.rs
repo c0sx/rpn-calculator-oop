@@ -1,18 +1,18 @@
 use crate::calculator::calculator::result;
+use crate::calculator::calculus::Calculus;
 use crate::calculator::sorter_station::SorterStation;
 use crate::calculator::tokenizer::Tokenizer;
-use crate::calculator::calculus::Calculus;
 
 pub struct Calculator {
     sorter: SorterStation,
-    calculus: Calculus
+    calculus: Calculus,
 }
 
 impl Calculator {
     pub fn new() -> Calculator {
         Calculator {
             sorter: SorterStation::new(),
-            calculus: Calculus::new()
+            calculus: Calculus::new(),
         }
     }
 

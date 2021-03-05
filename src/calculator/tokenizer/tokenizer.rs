@@ -7,12 +7,9 @@ pub struct Tokenizer {
 
 impl Tokenizer {
     pub fn new() -> Tokenizer {
-        Tokenizer {
-            cursor: 0,
-        }
+        Tokenizer { cursor: 0 }
     }
 
-    // собираем токены с помощью итератора
     pub fn parse(&mut self, input: &String) -> Vec<Token> {
         let without_whitespaces = input.split_whitespace().collect::<String>();
 
@@ -29,8 +26,8 @@ impl Tokenizer {
             return None;
         }
 
-        let mut cursor = TokenCursor::new(input.clone(), self.cursor);
-        let token = cursor.next();
+        let mut cursor = TokenCursor::new(input.clone());
+        let token = cursor.next(self.cursor);
 
         self.cursor += token.len();
 

@@ -1,5 +1,5 @@
-use crate::calculator::token::Token;
 use crate::calculator::calculus::RpnExpression;
+use crate::calculator::token::Token;
 
 pub struct SorterStation {}
 

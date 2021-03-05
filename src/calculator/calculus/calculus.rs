@@ -2,7 +2,7 @@ use crate::calculator;
 use crate::calculator::calculus::RpnExpression;
 use crate::calculator::token::Token;
 
-pub struct Calculus { }
+pub struct Calculus {}
 
 impl Calculus {
     pub fn new() -> Calculus {
@@ -86,11 +86,11 @@ impl Calculus {
         let args = self.get_arguments(arguments);
         let (a, b) = (args[0], args[1]);
 
-        if b == 0.0 {
+        if a == 0.0 {
             panic!("divizion by zero")
         }
 
-        a / b
+        b / a
     }
 
     fn negative(&self, arguments: &mut Vec<f64>) -> f64 {
@@ -103,7 +103,8 @@ impl Calculus {
     fn positive(&self, arguments: &mut Vec<f64>) -> f64 {
         let args = self.get_arguments(arguments);
         let a = args[0];
-        return if a < 0.0 { a * -1.0 } else { a };
+
+        a
     }
 
     fn get_arguments(&self, arguments: &mut Vec<f64>) -> Vec<f64> {

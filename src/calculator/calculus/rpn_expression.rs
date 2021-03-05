@@ -6,8 +6,6 @@ pub struct RpnExpression {
 
 impl RpnExpression {
     pub fn new(tokens: Vec<Token>) -> RpnExpression {
-        RpnExpression {
-            tokens,
-        }
+        RpnExpression { tokens }
     }
 }

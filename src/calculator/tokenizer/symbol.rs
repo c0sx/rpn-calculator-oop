@@ -1,4 +1,5 @@
 #[derive(PartialEq)]
+#[derive(Debug)]
 pub enum Symbol {
     Numeric,
     BinaryOperator,
