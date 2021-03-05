@@ -31,8 +31,9 @@ mod tests {
         ];
 
         for (left, right) in input {
-            let result = calculator::calculate(&String::from(left));
-            assert_eq!(result, right as f64);
+            let calc = calculator::Calculator::new();
+            let result = calc.calculate_from_string(&String::from(left));
+            assert_eq!(result.value, right as f64);
         }
     }
 }
