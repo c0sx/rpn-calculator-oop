@@ -1,24 +1,18 @@
-use crate::calculator;
-use crate::calculator::calculus::RpnExpression;
-use crate::calculator::token::{TokenType};
+use crate::calculator::{self, token::TokenType};
 
-pub struct Calculus {}
+pub struct RpnExpression {
+    pub tokens: Vec<TokenType>,
+}
 
-impl Calculus {
-    pub fn new() -> Calculus {
-        Calculus {}
+impl RpnExpression {
+    pub fn new(tokens: Vec<TokenType>) -> RpnExpression {
+        RpnExpression { tokens }
     }
 
-    pub fn calculate(&self, expression: RpnExpression) -> calculator::Result {
-        let result = self.execute(&expression);
-
-        calculator::Result::new(expression, result)
-    }
-
-    fn execute(&self, expression: &RpnExpression) -> f64 {
+    pub fn execute(&self) -> calculator::Result {
         let mut stack: Vec<f64> = Vec::new();
 
-        for token in &expression.tokens {
+        for token in &self.tokens {
             if token.is_numeric() {
                 stack.push(
                     token
@@ -35,10 +29,12 @@ impl Calculus {
         }
 
         let result = stack.pop();
-        match result {
+        let result = match result {
             Some(result) => result,
             None => panic!("Возникла ошибка при вычислении"),
-        }
+        };
+
+        calculator::Result::new(self.tokens.clone(), result)
     }
 
     fn evaluate(&self, token: &TokenType, arguments: &mut Vec<f64>) -> f64 {

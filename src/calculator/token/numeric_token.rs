@@ -24,7 +24,6 @@ impl Token for NumericToken {
         Err("Токен должен быть оператором")
     }
 
-
     fn move_on_sort(&self, output_queue: &mut Vec<TokenType>, _stack: &mut Vec<TokenType>) {
         output_queue.push(TokenType::Numeric(NumericToken::new(self.value.clone())));
     }

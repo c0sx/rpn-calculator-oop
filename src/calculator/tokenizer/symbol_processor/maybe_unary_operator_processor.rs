@@ -11,7 +11,12 @@ pub struct MaybeUnaryOperatorProcessor {
 
 impl Process for MaybeUnaryOperatorProcessor {
     fn process(&self, c: char, token: &mut String) -> bool {
-        let vec = self.input.chars().collect::<Vec<char>>();
+        let mut vec: Vec<char> = Vec::new();
+
+        for c in self.input.chars() {
+            vec.push(c);
+        }
+
         let prev = if self.cursor > 0 {
             vec.get(self.cursor - 1)
         } else {

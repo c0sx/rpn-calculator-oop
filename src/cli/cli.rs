@@ -23,7 +23,7 @@ impl Cli {
 
     pub fn output_results(&mut self, result: calculator::Result) {
         let mut expression_value = String::new();
-        for item in result.expression.tokens {
+        for item in result.expression {
             expression_value.push_str(item.value().as_str());
             expression_value.push_str(" ");
         }
@@ -49,6 +49,7 @@ impl Cli {
         self.stdout
             .write_all(line.as_bytes())
             .expect("Ошибка вывода");
+
         self.stdout.flush().expect("Ошибка вывода")
     }
 }
