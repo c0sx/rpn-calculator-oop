@@ -1,4 +1,4 @@
-use crate::calculator::token::Token;
+use crate::calculator::token::{TokenType};
 use crate::calculator::tokenizer::symbol::Symbol;
 use crate::calculator::tokenizer::symbol_processor::SymbolProcessor;
 
@@ -15,7 +15,7 @@ impl TokenCursor {
         }
     }
 
-    pub fn next(&mut self, cursor: usize) -> Token {
+    pub fn next(&mut self, cursor: usize) -> TokenType {
         let mut cursor = cursor;
         let substr = &self.input[cursor..];
         let mut token = String::new();
@@ -31,6 +31,6 @@ impl TokenCursor {
             }
         }
 
-        Token::new(token)
+        TokenType::from_string(token)
     }
 }

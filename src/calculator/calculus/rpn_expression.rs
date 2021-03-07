@@ -1,11 +1,11 @@
-use crate::calculator::token::Token;
+use crate::calculator::token::{TokenType};
 
 pub struct RpnExpression {
-    pub tokens: Vec<Token>,
+    pub tokens: Vec<TokenType>,
 }
 
 impl RpnExpression {
-    pub fn new(tokens: Vec<Token>) -> RpnExpression {
+    pub fn new(tokens: Vec<TokenType>) -> RpnExpression {
         RpnExpression { tokens }
     }
 }

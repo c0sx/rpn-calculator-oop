@@ -1,6 +1,6 @@
 use crate::calculator;
 use crate::calculator::calculus::RpnExpression;
-use crate::calculator::token::Token;
+use crate::calculator::token::{TokenType};
 
 pub struct Calculus {}
 
@@ -22,7 +22,7 @@ impl Calculus {
             if token.is_numeric() {
                 stack.push(
                     token
-                        .value
+                        .value()
                         .parse::<f64>()
                         .expect("Ошибка при парсинге аргумента"),
                 );
@@ -30,7 +30,7 @@ impl Calculus {
                 continue;
             }
 
-            let result = self.evaluate(token, &mut stack);
+            let result = self.evaluate(&token, &mut stack);
             stack.push(result);
         }
 
@@ -41,12 +41,12 @@ impl Calculus {
         }
     }
 
-    fn evaluate(&self, token: &Token, arguments: &mut Vec<f64>) -> f64 {
+    fn evaluate(&self, token: &TokenType, arguments: &mut Vec<f64>) -> f64 {
         if token.is_operator() == false {
             panic!("токен должен быть операцией")
         }
 
-        match token.value.as_str() {
+        match token.value().as_str() {
             "+" => self.add(arguments),
             "*" => self.multiply(arguments),
             "/" => self.divide(arguments),

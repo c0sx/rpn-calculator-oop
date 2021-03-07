@@ -1,3 +1,3 @@
-mod sorter;
+mod sorter_station;
 
-pub use sorter::SorterStation;
+pub use sorter_station::SorterStation;

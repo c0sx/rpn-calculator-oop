@@ -5,7 +5,7 @@ pub struct Result {
     pub value: f64,
 }
 
-impl Result {
+impl<'a> Result {
     pub fn new(expression: RpnExpression, result: f64) -> Result {
         Result {
             expression,

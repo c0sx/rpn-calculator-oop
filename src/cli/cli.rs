@@ -22,15 +22,13 @@ impl Cli {
     }
 
     pub fn output_results(&mut self, result: calculator::Result) {
-        let expression = result
-            .expression
-            .tokens
-            .iter()
-            .map(|t| t.value.as_str())
-            .collect::<Vec<&str>>()
-            .join(" ");
+        let mut expression_value = String::new();
+        for item in result.expression.tokens {
+            expression_value.push_str(item.value().as_str());
+            expression_value.push_str(" ");
+        }
 
-        self.output_string(expression.as_str());
+        self.output_string(expression_value.as_str().trim());
         self.output_string(result.value.to_string().as_str());
     }
 

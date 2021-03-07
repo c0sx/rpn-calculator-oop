@@ -1,4 +1,4 @@
-use crate::calculator::token::Token;
+use crate::calculator::token::{TokenType};
 use crate::calculator::tokenizer::cursor::TokenCursor;
 
 pub struct Tokenizer {
@@ -10,10 +10,10 @@ impl Tokenizer {
         Tokenizer { cursor: 0 }
     }
 
-    pub fn parse(&mut self, input: &String) -> Vec<Token> {
+    pub fn parse(&mut self, input: &String) -> Vec<TokenType> {
         let without_whitespaces = input.split_whitespace().collect::<String>();
 
-        let mut tokens: Vec<Token> = Vec::new();
+        let mut tokens: Vec<TokenType> = Vec::new();
         while let Some(token) = self.get_next_token(&without_whitespaces) {
             tokens.push(token)
         }
@@ -21,7 +21,7 @@ impl Tokenizer {
         tokens
     }
 
-    fn get_next_token(&mut self, input: &String) -> Option<Token> {
+    fn get_next_token(&mut self, input: &String) -> Option<TokenType> {
         if self.cursor >= input.chars().count() {
             return None;
         }
