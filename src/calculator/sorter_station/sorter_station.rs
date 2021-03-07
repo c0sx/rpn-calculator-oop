@@ -30,7 +30,6 @@ impl SorterStation {
     }
 
     fn remains_in_stack(&self, output_queue: &mut Vec<TokenType>, stack: &mut Vec<TokenType>) {
-        println!("queue {:?}", output_queue);
         while let Some(token) = stack.pop() {
             if token.is_brackets() {
                 panic!("Присутствует незакрытая скобка")
