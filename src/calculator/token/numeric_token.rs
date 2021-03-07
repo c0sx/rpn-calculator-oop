@@ -1,4 +1,4 @@
-use crate::calculator::token::{Token, TokenType};
+use crate::calculator::token::{Token};
 
 #[derive(Debug)]
 pub struct NumericToken {
@@ -22,10 +22,6 @@ impl Token for NumericToken {
 
     fn priority(&self) -> Result<u8, &'static str> {
         Err("Токен должен быть оператором")
-    }
-
-    fn move_on_sort(&self, output_queue: &mut Vec<TokenType>, _stack: &mut Vec<TokenType>) {
-        output_queue.push(TokenType::Numeric(NumericToken::new(self.value.clone())));
     }
 }
 

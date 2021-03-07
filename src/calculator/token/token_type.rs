@@ -83,14 +83,6 @@ impl TokenType {
         }
     }
 
-    pub fn move_on_sort(&self, output_queue: &mut Vec<TokenType>, stack: &mut Vec<TokenType>) {
-        match self {
-            TokenType::Operator(token) => token.move_on_sort(output_queue, stack),
-            TokenType::Numeric(token) => token.move_on_sort(output_queue, stack),
-            TokenType::Brackets(token) => token.move_on_sort(output_queue, stack),
-        }
-    }
-
     pub fn value(&self) -> String {
         match self {
             TokenType::Operator(token) => token.value().clone(),

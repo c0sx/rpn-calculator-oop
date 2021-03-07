@@ -1,11 +1,16 @@
 use crate::calculator::expression::RpnExpression;
 use crate::calculator::token::{TokenType};
+use crate::calculator::sorter_station::Mover;
 
-pub struct SorterStation {}
+pub struct SorterStation {
+    mover: Mover
+}
 
 impl SorterStation {
     pub fn new() -> SorterStation {
-        SorterStation {}
+        SorterStation {
+            mover: Mover::new()
+        }
     }
 
     pub fn sort(&self, expression: &Vec<TokenType>) -> RpnExpression {
@@ -25,7 +30,7 @@ impl SorterStation {
         stack: &mut Vec<TokenType>,
     ) {
         for token in expression {
-            token.move_on_sort(output_queue, stack);
+            self.mover.process_token(token, output_queue, stack);
         }
     }
 

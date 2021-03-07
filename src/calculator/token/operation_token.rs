@@ -1,4 +1,4 @@
-use crate::calculator::token::{Token, TokenType};
+use crate::calculator::token::{Token};
 
 #[derive(Debug)]
 pub struct OperationToken {
@@ -30,19 +30,6 @@ impl Token for OperationToken {
         };
 
         return Ok(value);
-    }
-
-    fn move_on_sort(&self, output_queue: &mut Vec<TokenType>, stack: &mut Vec<TokenType>) {
-        while let Some(last) = stack.last() {
-            if last.is_operator() == false || self.priority() > last.priority() {
-                break;
-            }
-
-            output_queue.push(last.clone());
-            stack.pop();
-        }
-
-        stack.push(TokenType::Operator(OperationToken::new(self.value.clone())))
     }
 }
 

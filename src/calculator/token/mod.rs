@@ -6,3 +6,6 @@ mod token;
 
 pub use token::{Token};
 pub use token_type::TokenType;
+pub use numeric_token::NumericToken;
+pub use brackets_token::BracketsToken;
+pub use operation_token::OperationToken;
